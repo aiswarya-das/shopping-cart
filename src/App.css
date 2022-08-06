@@ -1,37 +1,62 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   display: flex;
 }
 .buttons {
   border: none;
   color: #0f1419;
-  margin: 3px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 20px;
+  width: 35px;
+  height: 35px;
+  font-size: 0.8em;
+  margin-bottom: 8px;
+  /* margin-right: 8px; */
+  border-radius: 50%;
 }
 button:hover {
   border: 1px solid black;
 }
 .buttonClass {
+  height: fit-content;
+  margin-top: 0px;
+  margin-left: 30px;
+  margin-right: 10px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 8px;
+  row-gap: 8px;
+}
+h4 {
   /* border: 1px solid red; */
-  /* // margin-right: 30px; */
-  /* padding-top: 30px;
-  padding-left: 40px; */
+  width: fit-content;
+  margin-left: 30px;
+  /* margin-bottom: 5px; */
+  margin-top: 60px;
+  /* margin-left: 10px; */
 }
 .imageClass {
-  margin: 90px 80px 50px 30px;
+  margin: 0px 50px 50px 30px;
   /* border: 1px solid blue; */
   display: grid;
   grid-template-columns: auto auto auto auto;
   column-gap: 20px;
   row-gap: 50px;
 }
+.counter {
+  /* border: 1px solid red; */
+  /* text-align: left; */
+  width: fit-content;
+  margin-left: 30px;
+  margin-top: 60px;
+  /* height: fit-content; */
+  /* padding-left: 0px; */
+
+  /* margin: 90px 80px 50px 30px; */
+}
 .container {
   border: 1px solid black;
+  text-align: center;
   position: relative;
+  display: grid;
 }
 .img {
   top: 0;
@@ -56,10 +81,39 @@ button:hover {
   height: 50px;
   width: 250px;
   font-size: 16px;
-  background-color: #0f1419;
+  border: none;
+  background-color: rgb(27, 26, 32);
   color: white;
+  place-self: end;
+}
+.cart {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  background-image: url("/public/images/cart.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50%;
+}
+.shoppingCart {
+  flex: 1;
+  /* margin-right: 0%; */
+  /* width: fit-content;
+  height: fit-content; */
+  /* border: 1px solid black; */
+  /* background-color: rgb(27, 26, 32); */
+}
+.cartButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: rgb(27, 26, 32);
 }
 .add:hover {
   background-color: rgb(234, 191, 0);
   border: none;
+}
+#installments {
+  color: rgb(156, 155, 155);
 }

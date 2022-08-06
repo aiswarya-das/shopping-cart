@@ -5,17 +5,14 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(data.products);
   const search = (e) => {
-    // console.log(e.target.innerHTML);
-
     let str = e.target.innerHTML;
-    console.log(data.products);
-    const filtered = data.products.filter(
-      (item) => item.availableSizes.includes(str)
-      // item.value.toLowerCase().includes(str.toLowerCase())
+    // console.log(data.products);
+    const filtered = data.products.filter((item) =>
+      item.availableSizes.includes(str)
     );
-    console.log(filtered);
+    //console.log(filtered);
     setItems(filtered);
     // filtered.map((item) => {
     //   console.log(item.sku);
@@ -46,16 +43,6 @@ function App() {
 
     // });
 
-    // data.products.map((items) => {
-    //   console.log(items.availableSizes);
-    //   const filtered = items.filter((item) =>
-    //     //item.value.toLowerCase().includes(str.toLowerCase())
-    //     item.availableSizes.includes(str)
-    //   );
-    //   console.log(filtered);
-    // });
-
-    // populateList(filtered, ul);
     // fetch("data.json")
     //   .then((response) => response.json())
     //   .then((json) => console.log(json));
@@ -76,49 +63,73 @@ function App() {
   };
   return (
     <div className="App">
-      <div className="buttonClass">
-        <h4>Sizes:</h4>
-        <button className="buttons" value="xs" onClick={search}>
-          XS
-        </button>
-        <button className="buttons" onClick={search}>
-          S
-        </button>
-        <button className="buttons" onClick={search}>
-          M
-        </button>
-        <button className="buttons" onClick={search}>
-          ML
-        </button>
-        <button className="buttons" onClick={search}>
-          L
-        </button>
-        <button className="buttons" onClick={search}>
-          XL
-        </button>
-        <button className="buttons" onClick={search}>
-          XXL
-        </button>
+      <div>
+        <div>
+          <h4>Sizes:</h4>
+        </div>
+        <div className="buttonClass">
+          <button className="buttons" value="xs" onClick={search}>
+            XS
+          </button>
+          <button className="buttons" onClick={search}>
+            S
+          </button>
+          <button className="buttons" onClick={search}>
+            M
+          </button>
+          <button className="buttons" onClick={search}>
+            X
+          </button>
+          <button className="buttons" onClick={search}>
+            L
+          </button>
+          <button className="buttons" onClick={search}>
+            XL
+          </button>
+          <button className="buttons" onClick={search}>
+            XXL
+          </button>
+        </div>
       </div>
-      <div className="imageClass">
-        {items.map((item) => {
-          return (
-            <div className="container" key={item.id}>
-              <div className="banner">
-                <img className="img" src={item.sku}></img>
-                <div className="ship">
-                  {item.isFreeShipping && "free shipping"}
+      <div>
+        <div className="counter">
+          <p>{items.length} Product(s) found </p>
+        </div>
+        <div className="imageClass">
+          {items.map((item) => {
+            return (
+              <div className="container" key={item.id}>
+                <div className="banner">
+                  <img className="img" src={`./images/${item.sku}_1.jpg`}></img>
+                  {item.isFreeShipping && (
+                    <div className="ship">free shipping</div>
+                  )}
                 </div>
+                <p>{item.title}</p>
+                <p>
+                  {item.currencyFormat}
+                  {item.price}
+                  <p id="installments">
+                    {item.installments || item.installments > 0 ? (
+                      <>
+                        or {item.installments} x{item.currencyFormat}
+                        <b> {(item.price / item.installments).toFixed(2)}</b>
+                      </>
+                    ) : (
+                      <div> </div>
+                    )}
+                  </p>
+                </p>
+                <button className="add">Add to cart</button>
               </div>
-              <p>{item.title}</p>
-              <p>
-                {item.currencyFormat}
-                {item.price}
-              </p>
-              <button className="add">Add to cart</button>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+      </div>
+      <div className="shoppingCart">
+        <button className="cartButton">
+          <div className="cart"></div>
+        </button>
       </div>
     </div>
   );
