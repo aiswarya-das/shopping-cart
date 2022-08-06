@@ -11,6 +11,10 @@
   margin-bottom: 8px;
   border-radius: 50%;
 }
+.toggle-color {
+  background-color: #0f1419;
+  color: white;
+}
 button:hover {
   border: 1px solid black;
 }
@@ -86,10 +90,13 @@ h4 {
 }
 .shoppingCart {
   height: 100%;
+  /* width: 100px; */
   position: fixed;
   right: 0;
   top: 0;
   display: flex;
+  /* border: 1px solid red;
+  transition: width 2s; */
 }
 /* .parentCart {
   width: 500px;
@@ -111,6 +118,16 @@ h4 {
 .cartButton:hover {
   border: none;
   background-color: #0f1419;
+}
+.cartClose {
+  color: white;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-image: url("/public/images/closeButton.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50%;
 }
 .add:hover {
   background-color: rgb(234, 191, 0);

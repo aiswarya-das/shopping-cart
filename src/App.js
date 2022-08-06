@@ -7,9 +7,12 @@ import "./App.css";
 function App() {
   const [items, setItems] = useState(data.products);
   const [isCartOpen, setCart] = useState(false);
+  const [colour, setColor] = useState(false);
+
   const [arrayInit, setArray] = useState([]);
   let arr = [];
   const search = (e) => {
+    setColor(!colour);
     let str = e.target.innerHTML;
     arr.push(str);
     setArray(arr);
@@ -31,10 +34,16 @@ function App() {
         </div>
         <div className="buttonClass">
           {/* className={`myoriginal classes ${condition} ? " new class" : " "`} */}
-          <button className="buttons" value="xs" onClick={search}>
+          <button
+            className={"buttons " + (colour ? "toggle-color" : " ")}
+            onClick={search}
+          >
             XS
           </button>
-          <button className="buttons" onClick={search}>
+          <button
+            className={"buttons " + (colour ? "toggle-color" : " ")}
+            onClick={search}
+          >
             S
           </button>
           <button className="buttons" onClick={search}>
@@ -92,7 +101,7 @@ function App() {
 
       <div className="shoppingCart">
         <button className="cartButton" onClick={() => setCart(!isCartOpen)}>
-          <div className="cart"></div>
+          <div className={isCartOpen ? "cartClose" : "cart"}></div>
         </button>
         {isCartOpen ? <div className="cartContainer"> </div> : null}
       </div>
