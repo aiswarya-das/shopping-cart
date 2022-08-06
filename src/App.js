@@ -78,20 +78,19 @@ function App() {
                   )}
                 </div>
                 <p>{item.title}</p>
-                <p>
-                  {item.currencyFormat}
-                  {item.price}
-                  <p id="installments">
-                    {item.installments || item.installments > 0 ? (
-                      <>
-                        or {item.installments} x{item.currencyFormat}
-                        <b> {(item.price / item.installments).toFixed(2)}</b>
-                      </>
-                    ) : (
-                      <div> </div>
-                    )}
-                  </p>
+                {item.currencyFormat}
+                {item.price}
+                <p id="installments">
+                  {item.installments || item.installments > 0 ? (
+                    <>
+                      or {item.installments} x{item.currencyFormat}
+                      <b> {(item.price / item.installments).toFixed(2)}</b>
+                    </>
+                  ) : (
+                    <> </>
+                  )}
                 </p>
+
                 <button className="add">Add to cart</button>
               </div>
             );
