@@ -6,60 +6,22 @@ import "./App.css";
 
 function App() {
   const [items, setItems] = useState(data.products);
+  const [isCartOpen, setCart] = useState(false);
+  const [arrayInit, setArray] = useState([]);
+  let arr = [];
   const search = (e) => {
     let str = e.target.innerHTML;
+    arr.push(str);
+    setArray(arr);
+    console.log(arrayInit);
+    // console.log("arrayinit", arrayInit);
+
     // console.log(data.products);
     const filtered = data.products.filter((item) =>
       item.availableSizes.includes(str)
     );
     //console.log(filtered);
     setItems(filtered);
-    // filtered.map((item) => {
-    //   console.log(item.sku);
-    //   return (
-    //     <div className="container" key={item.id}>
-    //       <h4>hello there</h4>
-    //       <div className="banner">
-    //         <img className="img" src={item.sku}></img>
-    //         <div className="ship">{item.isFreeShipping && "free shipping"}</div>
-    //       </div>
-    //       <p>{item.title}</p>
-    //       <p>
-    //         {item.currencyFormat}
-    //         {item.price}
-    //       </p>
-    //       <button className="add">Add to cart</button>
-    //     </div>
-    //   );
-    // });
-
-    // data.products.map((item) => {
-    //   console.log(item.availableSizes[0]);
-    //   //  const filtered = item.filter(() =>
-    //   // //   item.value.toLowerCase().includes(str.toLowerCase())
-    //   const filtered = item.filter(() =>
-    //   item.value.toLowerCase().includes(str.toLowerCase())
-    //   );
-
-    // });
-
-    // fetch("data.json")
-    //   .then((response) => response.json())
-    //   .then((json) => console.log(json));
-    // fetch("data.json")
-    //   .then((res) => {
-    //     if (res.ok) {
-    //       return res.json();
-    //     }
-    //     throw new Error("error fetching!");
-    //   })
-    //   .then((json) => {
-    //     console.log(json);
-    //   })
-    //   .catch((e) => {
-    //     console.log("error", e);
-    //     alert(e);
-    //   });
   };
   return (
     <div className="App">
@@ -68,6 +30,7 @@ function App() {
           <h4>Sizes:</h4>
         </div>
         <div className="buttonClass">
+          {/* className={`myoriginal classes ${condition} ? " new class" : " "`} */}
           <button className="buttons" value="xs" onClick={search}>
             XS
           </button>
@@ -126,10 +89,12 @@ function App() {
           })}
         </div>
       </div>
+
       <div className="shoppingCart">
-        <button className="cartButton">
+        <button className="cartButton" onClick={() => setCart(!isCartOpen)}>
           <div className="cart"></div>
         </button>
+        {isCartOpen ? <div className="cartContainer"> </div> : null}
       </div>
     </div>
   );

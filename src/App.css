@@ -9,7 +9,6 @@
   height: 35px;
   font-size: 0.8em;
   margin-bottom: 8px;
-  /* margin-right: 8px; */
   border-radius: 50%;
 }
 button:hover {
@@ -26,31 +25,21 @@ button:hover {
   row-gap: 8px;
 }
 h4 {
-  /* border: 1px solid red; */
   width: fit-content;
   margin-left: 30px;
-  /* margin-bottom: 5px; */
   margin-top: 60px;
-  /* margin-left: 10px; */
 }
 .imageClass {
-  margin: 0px 50px 50px 30px;
-  /* border: 1px solid blue; */
+  margin: 0px 50px 50px 15px;
   display: grid;
   grid-template-columns: auto auto auto auto;
   column-gap: 20px;
   row-gap: 50px;
 }
 .counter {
-  /* border: 1px solid red; */
-  /* text-align: left; */
   width: fit-content;
   margin-left: 30px;
   margin-top: 60px;
-  /* height: fit-content; */
-  /* padding-left: 0px; */
-
-  /* margin: 90px 80px 50px 30px; */
 }
 .container {
   border: 1px solid black;
@@ -89,26 +78,39 @@ h4 {
 .cart {
   width: 50px;
   height: 50px;
-  position: relative;
+  display: inline-block;
   background-image: url("/public/images/cart.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 50%;
 }
 .shoppingCart {
-  flex: 1;
-  /* margin-right: 0%; */
-  /* width: fit-content;
-  height: fit-content; */
-  /* border: 1px solid black; */
-  /* background-color: rgb(27, 26, 32); */
-}
-.cartButton {
-  position: absolute;
-  top: 0;
+  height: 100%;
+  position: fixed;
   right: 0;
+  top: 0;
+  display: flex;
+}
+/* .parentCart {
+  width: 500px;
+  height: 200px;
+  border: 1px solid green;
+} */
+.cartButton {
+  width: fit-content;
+  height: fit-content;
   border: none;
   background-color: rgb(27, 26, 32);
+}
+.cartContainer {
+  height: 100%;
+  width: 400px;
+  /* transition: right 0.2s ease 0s; */
+  background-color: rgb(27, 26, 32);
+}
+.cartButton:hover {
+  border: none;
+  background-color: #0f1419;
 }
 .add:hover {
   background-color: rgb(234, 191, 0);
