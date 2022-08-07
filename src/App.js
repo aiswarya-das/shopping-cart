@@ -10,7 +10,7 @@ function App() {
   const [items, setItems] = useState(data.products);
   const [isCartOpen, setCart] = useState(false);
   const [filteredArray, setFilteredArray] = useState([]);
-
+  const [listItems, setListItems] = useState([]);
   const [arrayInit, setArray] = useState([]);
   // let arr = [];
   const setFilterSizes = (size) => {
@@ -29,7 +29,32 @@ function App() {
     // console.log("arrayinit", arrayInit);
     // setItems(filtered);
   };
-  console.log("arrayinit", filteredArray);
+  const addToCart = (
+    id,
+    sku,
+    title,
+    currencyFormat,
+    price,
+    availableSize,
+    style
+  ) => {
+    // let title = inputText;
+    let newItem = {
+      id,
+      title,
+      sku,
+      currencyFormat,
+      price,
+      availableSize,
+      style,
+    };
+    setListItems([...listItems, newItem]);
+    // setInputText("");
+    console.log(
+      `title:${title},id:${id},sku:${sku},currency:${currencyFormat},price:${price},sizes:${availableSize},style:${style}`
+    );
+  };
+  // console.log("arrayinit", filteredArray);
 
   useEffect(() => {
     setFilteredArray(
@@ -60,8 +85,7 @@ function App() {
               onClick={() => setFilterSizes(s)}
               key={s}
             >
-              {" "}
-              {s}{" "}
+              {s}
             </button>
           ))}
         </div>
@@ -94,7 +118,22 @@ function App() {
                   )}
                 </p>
 
-                <button className="add">Add to cart</button>
+                <button
+                  className="add"
+                  onClick={() =>
+                    addToCart(
+                      item.id,
+                      item.sku,
+                      item.title,
+                      item.currencyFormat,
+                      item.price,
+                      item.availableSizes,
+                      item.style
+                    )
+                  }
+                >
+                  Add to cart
+                </button>
               </div>
             );
           })}
@@ -118,12 +157,40 @@ function App() {
               </div>
             </div>
             <div className="todo">
-              <p>
-                Add some products in the cart
-                <br />
-                <br />
-                :)
-              </p>
+              {listItems.length ? (
+                <ul className="un-list">
+                  {listItems.map((item) => {
+                    return (
+                      <li key={item.id} className="list">
+                        <img
+                          className="img-2"
+                          src={`./images/${item.sku}_2.jpg`}
+                        ></img>
+                        <div className="details">
+                          <p>
+                            {item.title}
+                            <br />
+                            {item.availableSize}
+                            <br />
+                            quantity:
+                          </p>
+                        </div>
+                        <div className="text-color">
+                          {item.currencyFormat}
+                          {item.price}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <p>
+                  Add some products in the cart
+                  <br />
+                  <br />
+                  :)
+                </p>
+              )}
             </div>
 
             <div className="checkout-parent">
