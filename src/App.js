@@ -15,13 +15,11 @@ function App() {
   // let arr = [];
   const setFilterSizes = (size) => {
     // setColor(!colour);
-    if(arrayInit.includes(size)){
-      setArray(arrayInit.filter(item => item !== size))
-    }
-    else{
+    if (arrayInit.includes(size)) {
+      setArray(arrayInit.filter((item) => item !== size));
+    } else {
       setArray([...arrayInit, size]);
     }
-
 
     // const filtered = data.products.filter((item) =>
     //   // item.availableSizes.includes([...arrayInit])
@@ -35,18 +33,17 @@ function App() {
 
   useEffect(() => {
     setFilteredArray(
-      items.filter(
-        product => product.availableSizes.some(size => arrayInit.includes(size)  )
+      items.filter((product) =>
+        product.availableSizes.some((size) => arrayInit.includes(size))
       )
-    )
-  }
-  , [arrayInit]);
+    );
+  }, [arrayInit]);
 
   // isSizePresent = (size) => {
   //   return ;
   // }
 
-  const displayArray = arrayInit.length ? filteredArray : items
+  const displayArray = arrayInit.length ? filteredArray : items;
 
   return (
     <div className="App">
@@ -56,7 +53,16 @@ function App() {
         </div>
         <div className="buttonClass">
           {SIZES.map((s) => (
-            <button className={`buttons ${arrayInit.includes(s) ? " toggle-color": ""}`} onClick={() => setFilterSizes(s)} key={s}> {s} </button>
+            <button
+              className={`buttons ${
+                arrayInit.includes(s) ? " toggle-color" : ""
+              }`}
+              onClick={() => setFilterSizes(s)}
+              key={s}
+            >
+              {" "}
+              {s}{" "}
+            </button>
           ))}
         </div>
       </div>
@@ -99,7 +105,38 @@ function App() {
         <button className="cartButton" onClick={() => setCart(!isCartOpen)}>
           <div className={isCartOpen ? "cartClose" : "cart"}></div>
         </button>
-        {isCartOpen ? <div className="cartContainer"> </div> : null}
+        {isCartOpen ? (
+          <div className="cartContainer">
+            <div className="cart-parent">
+              <div className="cart-btn">
+                <div className="cart"></div>
+                <div>
+                  <p>
+                    <b>Cart</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="todo">
+              <p>
+                Add some products in the cart
+                <br />
+                <br />
+                :)
+              </p>
+            </div>
+
+            <div className="checkout-parent">
+              <div className="checkout">
+                <div className="price">
+                  <p>SUBTOTAL</p>
+                  <p>price</p>
+                </div>
+                <button className="submit">CHECKOUT</button>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
