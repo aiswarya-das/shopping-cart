@@ -1,29 +1,53 @@
 import logo from "./logo.svg";
 import data from "./data.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //import image from "../images";
 import "./App.css";
+
+const SIZES = ["XS", "S", "M", "X", "L", "XL", "XXL"];
 
 function App() {
   const [items, setItems] = useState(data.products);
   const [isCartOpen, setCart] = useState(false);
-  const [colour, setColor] = useState(false);
+  const [filteredArray, setFilteredArray] = useState([]);
 
   const [arrayInit, setArray] = useState([]);
   // let arr = [];
-  const search = (e) => {
-    setColor(!colour);
-    let str = e.target.innerHTML;
-    setArray([...arrayInit, str]);
+  const setFilterSizes = (size) => {
+    // setColor(!colour);
+    if(arrayInit.includes(size)){
+      setArray(arrayInit.filter(item => item !== size))
+    }
+    else{
+      setArray([...arrayInit, size]);
+    }
 
-    const filtered = data.products.filter((item) =>
-      // item.availableSizes.includes([...arrayInit])
-      arrayInit.some((el) => item.availableSizes.includes(el))
-    );
-    console.log("filtered", filtered);
-    console.log("arrayinit", arrayInit);
-    setItems(filtered);
+
+    // const filtered = data.products.filter((item) =>
+    //   // item.availableSizes.includes([...arrayInit])
+    //   arrayInit.some((el) => item.availableSizes.includes(el))
+    // );
+    // console.log("filtered", filtered);
+    // console.log("arrayinit", arrayInit);
+    // setItems(filtered);
   };
+  console.log("arrayinit", filteredArray);
+
+  useEffect(() => {
+    setFilteredArray(
+      items.filter(
+        product => product.availableSizes.some(size => arrayInit.includes(size)  )
+      )
+    )
+  }
+  , [arrayInit]);
+
+  // isSizePresent = (size) => {
+  //   return ;
+  // }
+
+  const displayArray = arrayInit.length ? filteredArray : items
+
   return (
     <div className="App">
       <div>
@@ -31,42 +55,17 @@ function App() {
           <h4>Sizes:</h4>
         </div>
         <div className="buttonClass">
-          {/* className={`myoriginal classes ${condition} ? " new class" : " "`} */}
-          <button
-            className={"buttons " + (colour ? "toggle-color" : " ")}
-            onClick={search}
-          >
-            XS
-          </button>
-          <button
-            className={"buttons " + (colour ? "toggle-color" : " ")}
-            onClick={search}
-          >
-            S
-          </button>
-          <button className="buttons" onClick={search}>
-            M
-          </button>
-          <button className="buttons" onClick={search}>
-            X
-          </button>
-          <button className="buttons" onClick={search}>
-            L
-          </button>
-          <button className="buttons" onClick={search}>
-            XL
-          </button>
-          <button className="buttons" onClick={search}>
-            XXL
-          </button>
+          {SIZES.map((s) => (
+            <button className={`buttons ${arrayInit.includes(s) ? " toggle-color": ""}`} onClick={() => setFilterSizes(s)} key={s}> {s} </button>
+          ))}
         </div>
       </div>
       <div>
         <div className="counter">
-          <p>{items.length} Product(s) found </p>
+          <p>{displayArray.length} Product(s) found </p>
         </div>
         <div className="imageClass">
-          {items.map((item) => {
+          {displayArray.map((item) => {
             return (
               <div className="container" key={item.id}>
                 <div className="banner">
