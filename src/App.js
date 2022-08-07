@@ -10,20 +10,18 @@ function App() {
   const [colour, setColor] = useState(false);
 
   const [arrayInit, setArray] = useState([]);
-  let arr = [];
+  // let arr = [];
   const search = (e) => {
     setColor(!colour);
     let str = e.target.innerHTML;
-    arr.push(str);
-    setArray(arr);
-    console.log(arrayInit);
-    // console.log("arrayinit", arrayInit);
+    setArray([...arrayInit, str]);
 
-    // console.log(data.products);
     const filtered = data.products.filter((item) =>
-      item.availableSizes.includes(str)
+      // item.availableSizes.includes([...arrayInit])
+      arrayInit.some((el) => item.availableSizes.includes(el))
     );
-    //console.log(filtered);
+    console.log("filtered", filtered);
+    console.log("arrayinit", arrayInit);
     setItems(filtered);
   };
   return (
