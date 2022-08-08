@@ -89,6 +89,30 @@ function App() {
   };
   // console.log("arrayinit", filteredArray);
 
+  const delt = (id) => {
+    // alert(id);
+    // let itemUpdatedClone = listItems.item.filter((items) => items.id != id);
+    let itemUpdatedClone = listItems.filter((items) => items.item.id != id);
+    setListItems(itemUpdatedClone);
+
+    console.log(itemUpdatedClone);
+
+    // listItems.map((items) => {
+    //   let itemUpdatedClone = items.filter((item) => item.id != id);
+    //   console.log(itemUpdatedClone);
+    //   // setListItems(itemUpdatedClone);
+
+    //   //     if (items.item.id == newItem.item.id) {
+    //   //       console.log("includes");
+    //   //       // listItems.filter((item) => (item.quantity = +1)
+    //   //       const qtyArray = [...items, (items.qty = +1)];
+    //   //       setListItems([...listItems, qtyArray]);
+    //   //     } else {
+    //   //       console.log("doesn't include");
+    //   //       setListItems([...listItems, newItem]);
+    //   //     }
+    // });
+  };
   useEffect(() => {
     // setFilteredArray(
     //   items.filter((product) =>
@@ -218,7 +242,10 @@ function App() {
                           </p>
                         </div>
                         <div className="text-color">
-                          <button className="delete">
+                          <button
+                            className="delete"
+                            onClick={() => delt(items.item.id)}
+                          >
                             <b>X</b>
                           </button>
                           <p>
