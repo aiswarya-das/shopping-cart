@@ -162,6 +162,7 @@ h4 {
 }
 .todo {
   /* border: 3px solid red; */
+  overflow: scroll;
   min-height: 41%;
   text-align: center;
 }
@@ -232,10 +233,22 @@ h4 {
   padding: 10px;
 }
 .text-color {
+  /* padding: 5px; */
   color: rgb(234, 191, 0);
 }
 .un-list {
   /* border: 2px solid red; */
 }
 .details {
+}
+.delete {
+  border: none;
+  color: black;
+  font-size: 16px;
+  background-color: rgb(27, 26, 32);
+}
+.delete:hover {
+  border: none;
+  color: white;
+  /* background-color: #0f1419; */
 }

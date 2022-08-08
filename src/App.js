@@ -12,6 +12,7 @@ function App() {
   const [filteredArray, setFilteredArray] = useState([]);
   const [listItems, setListItems] = useState([]);
   const [arrayInit, setArray] = useState([]);
+  // const [quantity,setQuantity] = useState([1]);
   // let arr = [];
   const setFilterSizes = (size) => {
     // setColor(!colour);
@@ -40,21 +41,62 @@ function App() {
   ) => {
     // let title = inputText;
     let newItem = {
-      id,
-      title,
-      sku,
-      currencyFormat,
-      price,
-      availableSize,
-      style,
+      item: {
+        id,
+        title,
+        sku,
+        currencyFormat,
+        price,
+        availableSize,
+        style,
+      },
+      qty: 1,
     };
+
+    console.log(newItem);
     setListItems([...listItems, newItem]);
+    // [{item:{sku:,title:},qty:1},{item:{product},qty:2}]
+
+    // if (listItems.length) {
+    //   listItems.map((items) => {
+    //     if (items.item.id == newItem.item.id) {
+    //       console.log("includes");
+    //       // listItems.filter((item) => (item.quantity = +1)
+    //       const qtyArray = [...items, (items.qty = +1)];
+    //       setListItems([...listItems, qtyArray]);
+    //     } else {
+    //       console.log("doesn't include");
+    //       setListItems([...listItems, newItem]);
+    //     }
+    //   });
+    // } else {
+    //   setListItems([...listItems, newItem]);
+    // }
+
+    // console.log(listItems);
+
+    // if (listItems.item.includes(newItem.item)) {
+    //   setListItems(["ammu"]);
+    //   //setArray(listItems.filter((item) => (item.quantity = +1)));
+    // } else {
+    //   setListItems([...listItems, newItem]);
+    // }
+
     // setInputText("");
     console.log(
       `title:${title},id:${id},sku:${sku},currency:${currencyFormat},price:${price},sizes:${availableSize},style:${style}`
     );
   };
   // console.log("arrayinit", filteredArray);
+
+  useEffect(() => {
+    // setFilteredArray(
+    //   items.filter((product) =>
+    //     product.availableSizes.some((size) => arrayInit.includes(size))
+    //   )
+    // );
+    console.log(listItems);
+  }, [listItems]);
 
   useEffect(() => {
     setFilteredArray(
@@ -159,25 +201,30 @@ function App() {
             <div className="todo">
               {listItems.length ? (
                 <ul className="un-list">
-                  {listItems.map((item) => {
+                  {listItems.map((items) => {
                     return (
-                      <li key={item.id} className="list">
+                      <li key={items.item.sku} className="list">
                         <img
                           className="img-2"
-                          src={`./images/${item.sku}_2.jpg`}
+                          src={`./images/${items.item.sku}_2.jpg`}
                         ></img>
                         <div className="details">
                           <p>
-                            {item.title}
+                            {items.item.title}
                             <br />
-                            {item.availableSize}
+                            {items.item.availableSize[0]}
                             <br />
-                            quantity:
+                            {`Quantity:${items.qty}`}
                           </p>
                         </div>
                         <div className="text-color">
-                          {item.currencyFormat}
-                          {item.price}
+                          <button className="delete">
+                            <b>X</b>
+                          </button>
+                          <p>
+                            {items.item.currencyFormat}
+                            {items.item.price}
+                          </p>
                         </div>
                       </li>
                     );
