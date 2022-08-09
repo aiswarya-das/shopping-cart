@@ -85,7 +85,7 @@ function App() {
     cartList.forEach((items) => {
       price = price + items.item.price * items.qty;
     });
-    return `$ ${price.toFixed(2)}`;
+    return `${price.toFixed(2)}`;
   };
 
   const getTotal = () => {
@@ -98,7 +98,12 @@ function App() {
 
   const checkout = () => {
     let finalPrice = getPrice();
-    alert(`Checkout - Subtotal: ${finalPrice}`);
+    console.log(finalPrice);
+    if (finalPrice > 0) {
+      alert(`Checkout - Subtotal: $${finalPrice}`);
+    } else {
+      alert("add some product in the cart!");
+    }
   };
 
   const decrementItem = (id) => {
@@ -275,7 +280,7 @@ function App() {
                 <div className="price">
                   <p className="fade">SUBTOTAL</p>
                   {/* <p>$ {InitialPrice}</p> */}
-                  <p className="total-price">{getPrice()}</p>
+                  <p className="total-price">${getPrice()}</p>
                   {/* <div> </div> */}
                 </div>
                 <button className="submit" onClick={() => checkout()}>
