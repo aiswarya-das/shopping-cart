@@ -157,10 +157,10 @@ function App() {
                     <div className="ship">free shipping</div>
                   )}
                 </div>
-                <p>{item.title}</p>
+                <p className="title">{item.title}</p>
                 {item.currencyFormat}
                 {item.price}
-                <p id="installments">
+                <p className="installments">
                   {item.installments || item.installments > 0 ? (
                     <>
                       or {item.installments} x{item.currencyFormat}
@@ -225,22 +225,21 @@ function App() {
                           src={`./images/${items.item.sku}_2.jpg`}
                         ></img>
                         <div className="details">
-                          <p>
-                            {items.item.title}
-                            <br />
+                          <p className="item-title">{items.item.title}</p>
+                          <p className="fade">
                             {items.item.availableSizes[0]}
                             <br />
                             {`Quantity: ${items.qty}`}
                           </p>
                         </div>
-                        <div className="text-color">
+                        <div className="addDelt">
                           <button
                             className="delete"
                             onClick={() => delt(items.item.id)}
                           >
                             <b>X</b>
                           </button>
-                          <p>
+                          <p className="text-color">
                             {items.item.currencyFormat}
                             {items.item.price}
                           </p>
