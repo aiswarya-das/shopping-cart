@@ -11,6 +11,7 @@ function App() {
   const [isCartOpen, setCart] = useState(false);
   const [filteredArray, setFilteredArray] = useState([]);
   const [listItems, setListItems] = useState([]);
+  const [cartList, setCartlist] = useState([]);
   const [arrayInit, setArray] = useState([]);
   // const [quantity,setQuantity] = useState([1]);
   // let arr = [];
@@ -31,61 +32,41 @@ function App() {
     // setItems(filtered);
   };
   const addToCart = (
-    id,
-    sku,
-    title,
-    currencyFormat,
-    price,
-    availableSize,
-    style
+    item
+    // id,
+    // sku,
+    // title,
+    // currencyFormat,
+    // price,
+    // availableSize,
+    // style
   ) => {
     // let title = inputText;
     let newItem = {
-      item: {
-        id,
-        title,
-        sku,
-        currencyFormat,
-        price,
-        availableSize,
-        style,
-      },
+      item,
       qty: 1,
     };
 
-    console.log(newItem);
-    setListItems([...listItems, newItem]);
+    //console.log(newItem);
+    // setListItems([...listItems, newItem]);
     // [{item:{sku:,title:},qty:1},{item:{product},qty:2}]
-
-    // if (listItems.length) {
-    //   listItems.map((items) => {
-    //     if (items.item.id == newItem.item.id) {
-    //       console.log("includes");
-    //       // listItems.filter((item) => (item.quantity = +1)
-    //       const qtyArray = [...items, (items.qty = +1)];
-    //       setListItems([...listItems, qtyArray]);
-    //     } else {
-    //       console.log("doesn't include");
-    //       setListItems([...listItems, newItem]);
-    //     }
-    //   });
-    // } else {
-    //   setListItems([...listItems, newItem]);
-    // }
-
-    // console.log(listItems);
-
-    // if (listItems.item.includes(newItem.item)) {
-    //   setListItems(["ammu"]);
-    //   //setArray(listItems.filter((item) => (item.quantity = +1)));
-    // } else {
-    //   setListItems([...listItems, newItem]);
-    // }
-
-    // setInputText("");
-    console.log(
-      `title:${title},id:${id},sku:${sku},currency:${currencyFormat},price:${price},sizes:${availableSize},style:${style}`
-    );
+    let productPresentFlag = false;
+    if (listItems.length) {
+      let duplicateClone = cartList.map((items) => {
+        if (items.item.id == item.id) {
+          items.qty += 1;
+          productPresentFlag = true;
+        }
+        return items;
+      });
+      console.log("dup clone", duplicateClone);
+      if (!productPresentFlag) {
+        duplicateClone = [...duplicateClone, newItem];
+      }
+      setCartlist(duplicateClone);
+    } else {
+      setListItems([...listItems, newItem]);
+    }
   };
   // console.log("arrayinit", filteredArray);
 
@@ -96,30 +77,10 @@ function App() {
     setListItems(itemUpdatedClone);
 
     console.log(itemUpdatedClone);
-
-    // listItems.map((items) => {
-    //   let itemUpdatedClone = items.filter((item) => item.id != id);
-    //   console.log(itemUpdatedClone);
-    //   // setListItems(itemUpdatedClone);
-
-    //   //     if (items.item.id == newItem.item.id) {
-    //   //       console.log("includes");
-    //   //       // listItems.filter((item) => (item.quantity = +1)
-    //   //       const qtyArray = [...items, (items.qty = +1)];
-    //   //       setListItems([...listItems, qtyArray]);
-    //   //     } else {
-    //   //       console.log("doesn't include");
-    //   //       setListItems([...listItems, newItem]);
-    //   //     }
-    // });
   };
+
   useEffect(() => {
-    // setFilteredArray(
-    //   items.filter((product) =>
-    //     product.availableSizes.some((size) => arrayInit.includes(size))
-    //   )
-    // );
-    console.log(listItems);
+    console.log("listItems", listItems);
   }, [listItems]);
 
   useEffect(() => {
@@ -129,10 +90,6 @@ function App() {
       )
     );
   }, [arrayInit]);
-
-  // isSizePresent = (size) => {
-  //   return ;
-  // }
 
   const displayArray = arrayInit.length ? filteredArray : items;
 
@@ -188,13 +145,13 @@ function App() {
                   className="add"
                   onClick={() =>
                     addToCart(
-                      item.id,
-                      item.sku,
-                      item.title,
-                      item.currencyFormat,
-                      item.price,
-                      item.availableSizes,
-                      item.style
+                      item
+                      // item.sku,
+                      // item.title,
+                      // item.currencyFormat,
+                      // item.price,
+                      // item.availableSizes,
+                      // item.style
                     )
                   }
                 >
@@ -236,7 +193,7 @@ function App() {
                           <p>
                             {items.item.title}
                             <br />
-                            {items.item.availableSize[0]}
+                            {items.item.availableSizes[0]}
                             <br />
                             {`Quantity:${items.qty}`}
                           </p>
