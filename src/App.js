@@ -79,6 +79,15 @@ function App() {
     );
   }, [arrayInit]);
 
+  const getPrice =() => {
+    let price = 0;
+
+    cartList.forEach((items) => {
+      price = (price + items.item.price * items.qty);
+    })
+    return `$ ${price.toFixed(2)}`;
+  }
+
   const displayArray = arrayInit.length ? filteredArray : items;
 
   return (
@@ -217,7 +226,7 @@ function App() {
                 <div className="price">
                   <p>SUBTOTAL</p>
                   {/* <p>$ {InitialPrice}</p> */}
-                  <div>{cartList.map((items) => {})}</div>
+                  <div>{getPrice()}</div>
                 </div>
                 <button className="submit">CHECKOUT</button>
               </div>
