@@ -125,7 +125,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className="button-parent">
         <div>
           <h4>Sizes:</h4>
         </div>
