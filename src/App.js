@@ -160,7 +160,7 @@ function App() {
                 <p className="title">{item.title}</p>
                 {item.currencyFormat}
                 {item.price}
-                <p className="installments">
+                <p className="fade">
                   {item.installments || item.installments > 0 ? (
                     <>
                       or {item.installments} x{item.currencyFormat}
@@ -226,7 +226,7 @@ function App() {
                         ></img>
                         <div className="details">
                           <p className="item-title">{items.item.title}</p>
-                          <p className="fade">
+                          <p className="details-fade">
                             {items.item.availableSizes[0]}
                             <br />
                             {`Quantity: ${items.qty}`}
@@ -273,7 +273,7 @@ function App() {
             <div className="checkout-parent">
               <div className="checkout">
                 <div className="price">
-                  <p>SUBTOTAL</p>
+                  <p className="fade">SUBTOTAL</p>
                   {/* <p>$ {InitialPrice}</p> */}
                   <p className="total-price">{getPrice()}</p>
                   {/* <div> </div> */}

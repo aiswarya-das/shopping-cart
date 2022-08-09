@@ -232,13 +232,13 @@ h4 {
   background-color: rgb(234, 191, 0);
   border: none;
 } */
-.fade {
+.details-fade {
   color: rgb(156, 155, 155);
   /* border: 1px solid blue; */
   margin: 0px;
   /* margin-top: 0px; */
 }
-.installments {
+.fade {
   color: rgb(156, 155, 155);
 }
 .list {
@@ -340,6 +340,7 @@ h4 {
 }
 .total-price {
   color: rgb(234, 191, 0);
+  margin: 10px;
   font-size: 22px;
 }
 .container:hover .add {
