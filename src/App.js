@@ -13,8 +13,7 @@ function App() {
   const [listItems, setListItems] = useState([]);
   const [cartList, setCartlist] = useState([]);
   const [arrayInit, setArray] = useState([]);
-  // const [quantity,setQuantity] = useState([1]);
-  // let arr = [];
+
   const setFilterSizes = (size) => {
     // setColor(!colour);
     if (arrayInit.includes(size)) {
@@ -22,14 +21,6 @@ function App() {
     } else {
       setArray([...arrayInit, size]);
     }
-
-    // const filtered = data.products.filter((item) =>
-    //   // item.availableSizes.includes([...arrayInit])
-    //   arrayInit.some((el) => item.availableSizes.includes(el))
-    // );
-    // console.log("filtered", filtered);
-    // console.log("arrayinit", arrayInit);
-    // setItems(filtered);
   };
   const addToCart = (
     item
@@ -51,30 +42,26 @@ function App() {
     // setListItems([...listItems, newItem]);
     // [{item:{sku:,title:},qty:1},{item:{product},qty:2}]
     let productPresentFlag = false;
-    if (listItems.length) {
-      let duplicateClone = cartList.map((items) => {
-        if (items.item.id == item.id) {
-          items.qty += 1;
-          productPresentFlag = true;
-        }
-        return items;
-      });
-      console.log("dup clone", duplicateClone);
-      if (!productPresentFlag) {
-        duplicateClone = [...duplicateClone, newItem];
+
+    let duplicateClone = cartList.map((items) => {
+      if (items.item.id == item.id) {
+        items.qty += 1;
+        productPresentFlag = true;
       }
-      setCartlist(duplicateClone);
-    } else {
-      setListItems([...listItems, newItem]);
+      return items;
+    });
+    if (!productPresentFlag) {
+      duplicateClone = [...duplicateClone, newItem];
     }
+    console.log("dup clone", duplicateClone);
+    setCartlist(duplicateClone);
   };
-  // console.log("arrayinit", filteredArray);
 
   const delt = (id) => {
     // alert(id);
     // let itemUpdatedClone = listItems.item.filter((items) => items.id != id);
-    let itemUpdatedClone = listItems.filter((items) => items.item.id != id);
-    setListItems(itemUpdatedClone);
+    let itemUpdatedClone = cartList.filter((items) => items.item.id != id);
+    setCartlist(itemUpdatedClone);
 
     console.log(itemUpdatedClone);
   };
@@ -180,9 +167,9 @@ function App() {
               </div>
             </div>
             <div className="todo">
-              {listItems.length ? (
+              {cartList.length ? (
                 <ul className="un-list">
-                  {listItems.map((items) => {
+                  {cartList.map((items) => {
                     return (
                       <li key={items.item.sku} className="list">
                         <img
