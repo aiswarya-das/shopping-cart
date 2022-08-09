@@ -217,7 +217,7 @@ function App() {
                 <div className="price">
                   <p>SUBTOTAL</p>
                   {/* <p>$ {InitialPrice}</p> */}
-                  <div></div>
+                  <div>{cartList.map((items) => {})}</div>
                 </div>
                 <button className="submit">CHECKOUT</button>
               </div>
