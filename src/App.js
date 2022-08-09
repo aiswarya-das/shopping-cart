@@ -88,6 +88,17 @@ function App() {
     return `$ ${price.toFixed(2)}`;
   }
 
+  const decrementItem = (id) => {
+    let itemUpdatedClone = cartList.map((items) => {
+      if (items.item.id == id && items.qty >1) {
+        items.qty -= 1;
+      }
+      return items;
+    })
+    setCartlist(itemUpdatedClone);
+  }
+
+
   const displayArray = arrayInit.length ? filteredArray : items;
 
   return (
@@ -206,6 +217,7 @@ function App() {
                             {items.item.currencyFormat}
                             {items.item.price}
                           </p>
+                          <button onClick={() => decrementItem(items.item.id)}> - </button>
                         </div>
                       </li>
                     );
