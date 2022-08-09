@@ -12,6 +12,7 @@ function App() {
   const [filteredArray, setFilteredArray] = useState([]);
   const [listItems, setListItems] = useState([]);
   const [cartList, setCartlist] = useState([]);
+  const [InitialPrice, setPrice] = useState("0.00");
   const [arrayInit, setArray] = useState([]);
 
   const setFilterSizes = (size) => {
@@ -215,7 +216,8 @@ function App() {
               <div className="checkout">
                 <div className="price">
                   <p>SUBTOTAL</p>
-                  <p>price</p>
+                  {/* <p>$ {InitialPrice}</p> */}
+                  <div></div>
                 </div>
                 <button className="submit">CHECKOUT</button>
               </div>
