@@ -94,6 +94,7 @@ h4 {
   border: none;
   background-color: rgb(12, 11, 16);
   color: white;
+  cursor: pointer;
   /* position: absolute;
   bottom: 0; */
   /* margin-top: 50px;
@@ -112,6 +113,7 @@ h4 {
   width: 50px;
   height: 50px;
   margin-right: 5px;
+  position: relative;
   /* display: inline-block; */
   background-image: url("/public/images/cart.png");
   background-repeat: no-repeat;
@@ -245,10 +247,56 @@ h4 {
   border: none;
   color: black;
   font-size: 16px;
+  cursor: pointer;
   background-color: rgb(27, 26, 32);
 }
 .delete:hover {
   border: none;
   color: white;
   /* background-color: #0f1419; */
+}
+.total {
+  /* text-align: center;
+  border-radius: 50%;
+  border: none;
+  color: #0f1419;
+  width: 35px;
+  height: 35px;
+  font-size: 0.8em; */
+
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  color: rgb(12, 11, 16);
+  font-weight: bold;
+  font-size: 0.7em;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 50%;
+  background-color: rgb(234, 191, 0);
+  position: absolute;
+  bottom: 0px;
+  right: 5px;
+}
+.decre {
+  border: none;
+  color: white;
+  background-color: black;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  /* width: 10px; */
+  /* height: 10px; */
+}
+.incre {
+  border: none;
+  color: white;
+  background-color: black;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.total-price {
+  color: rgb(234, 191, 0);
+  font-size: 22px;
 }

@@ -12,7 +12,7 @@ function App() {
   const [filteredArray, setFilteredArray] = useState([]);
   const [listItems, setListItems] = useState([]);
   const [cartList, setCartlist] = useState([]);
-  const [InitialPrice, setPrice] = useState("0.00");
+  // const [InitialPrice, setPrice] = useState("0.00");
   const [arrayInit, setArray] = useState([]);
 
   const setFilterSizes = (size) => {
@@ -79,25 +79,47 @@ function App() {
     );
   }, [arrayInit]);
 
-  const getPrice =() => {
+  const getPrice = () => {
     let price = 0;
 
     cartList.forEach((items) => {
-      price = (price + items.item.price * items.qty);
-    })
+      price = price + items.item.price * items.qty;
+    });
     return `$ ${price.toFixed(2)}`;
-  }
+  };
+
+  const getTotal = () => {
+    let tqty = 0;
+    cartList.forEach((items) => {
+      tqty = tqty + items.qty;
+    });
+    return tqty;
+  };
+
+  const checkout = () => {
+    let finalPrice = getPrice();
+    alert(`Checkout - Subtotal: ${finalPrice}`);
+  };
 
   const decrementItem = (id) => {
     let itemUpdatedClone = cartList.map((items) => {
-      if (items.item.id == id && items.qty >1) {
+      if (items.item.id == id && items.qty > 1) {
         items.qty -= 1;
       }
       return items;
-    })
+    });
     setCartlist(itemUpdatedClone);
-  }
+  };
 
+  const incrementItem = (id) => {
+    let itemUpdatedClone = cartList.map((items) => {
+      if (items.item.id == id) {
+        items.qty += 1;
+      }
+      return items;
+    });
+    setCartlist(itemUpdatedClone);
+  };
 
   const displayArray = arrayInit.length ? filteredArray : items;
 
@@ -173,13 +195,18 @@ function App() {
 
       <div className="shoppingCart">
         <button className="cartButton" onClick={() => setCart(!isCartOpen)}>
-          <div className={isCartOpen ? "cartClose" : "cart"}></div>
+          <div className={isCartOpen ? "cartClose" : "cart"}>
+            {isCartOpen ? "" : <div className="total">{getTotal()}</div>}
+          </div>
         </button>
         {isCartOpen ? (
           <div className="cartContainer">
             <div className="cart-parent">
               <div className="cart-btn">
-                <div className="cart"></div>
+                <div className="cart">
+                  <div className="total">{getTotal()}</div>
+                </div>
+                {/* <div></div> */}
                 <div>
                   <p>
                     <b>Cart</b>
@@ -203,7 +230,7 @@ function App() {
                             <br />
                             {items.item.availableSizes[0]}
                             <br />
-                            {`Quantity:${items.qty}`}
+                            {`Quantity: ${items.qty}`}
                           </p>
                         </div>
                         <div className="text-color">
@@ -217,7 +244,18 @@ function App() {
                             {items.item.currencyFormat}
                             {items.item.price}
                           </p>
-                          <button onClick={() => decrementItem(items.item.id)}> - </button>
+                          <button
+                            className="decre"
+                            onClick={() => decrementItem(items.item.id)}
+                          >
+                            -
+                          </button>
+                          <button
+                            className="incre"
+                            onClick={() => incrementItem(items.item.id)}
+                          >
+                            +
+                          </button>
                         </div>
                       </li>
                     );
@@ -238,9 +276,12 @@ function App() {
                 <div className="price">
                   <p>SUBTOTAL</p>
                   {/* <p>$ {InitialPrice}</p> */}
-                  <div>{getPrice()}</div>
+                  <p className="total-price">{getPrice()}</p>
+                  {/* <div> </div> */}
                 </div>
-                <button className="submit">CHECKOUT</button>
+                <button className="submit" onClick={() => checkout()}>
+                  CHECKOUT
+                </button>
               </div>
             </div>
           </div>
