@@ -56,6 +56,10 @@ function App() {
     }
     console.log("dup clone", duplicateClone);
     setCartlist(duplicateClone);
+
+    if (cartList.length < 1) {
+      setCart(true);
+    }
   };
 
   const delt = (id) => {
@@ -140,7 +144,10 @@ function App() {
               className={`buttons ${
                 arrayInit.includes(s) ? " toggle-color" : ""
               }`}
-              onClick={() => setFilterSizes(s)}
+              onClick={() => {
+                setFilterSizes(s);
+                // setCart(true);
+              }}
               key={s}
             >
               {s}
